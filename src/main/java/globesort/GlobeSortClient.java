@@ -54,17 +54,17 @@ public class GlobeSortClient {
 
         long t_before_total = System.nanoTime();
         IntArray response = serverStub.sortIntegers(request);
-        long t_after_total = nanoTime();
+        long t_after_total = System.nanoTime();
         // the unit of t_total is nanosecond
         long t_total = t_after_total - t_before_total;
         System.out.println("Total Invocation Time is: " + t_total + " nanoseconds");
 
-        double app_thp = (double) values.length / (t_total*1.0/10^9);
+        double app_thp = (double) values.length / (t_total*1.0/1000000000);
         System.out.println("Application Throughput is: " + app_thp + " /second");
 
-        long t_sort = response.getSortime();
-        long t_network = (t_total - t_sort)/2.0;
-        double nw_thp = (double) values.length / (t_network*1.0/10^9);
+        long t_sort = response.getTime();
+        long t_network = (t_total - t_sort)/2;
+        double nw_thp = (double) values.length / (t_network*1.0/1000000000);
         System.out.println("Network Throughput is: " + nw_thp + " /second");
 
         System.out.println("Total invo");
